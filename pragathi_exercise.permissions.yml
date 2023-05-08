@@ -1,0 +1,3 @@
+config form permission:  #this is the permission that is configured for config form
+  title: 'config title' #title for the permission that appears on permissions on the site
+  description: 'config description' #description for the permission that appears on permissions on the site

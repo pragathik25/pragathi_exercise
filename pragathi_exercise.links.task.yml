@@ -1,0 +1,25 @@
+pragathi_exercise.custom_demo:  #to create a menu tab
+  route_name: pragathi_exercise.custom_demo #where the tab should redirect to i.e custom form
+  title : custom demo  #title for the tab
+  base_route: pragathi_exercise.controller_demo #where the tab should be placed
+  weight: 11 #gives the priority which tab should appear first
+
+pragathi_exercise.config_demo:
+  route_name: pragathi_exercise.config_demo #where the tab should redirect to i.e config form
+  title : config demo #title for the tab
+  base_route: pragathi_exercise.controller_demo #where the tab should be placed
+  weight: 22
+
+
+pragathi_exercise.controller_demo:
+  route_name: pragathi_exercise.controller_demo #where the tab should redirect to i.e controller form
+  title : controller demo #title for the tab
+  base_route: pragathi_exercise.controller_demo #where the tab should be placed
+  weight: 33
+
+
+
+
+
+
+

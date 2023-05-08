@@ -1,0 +1,27 @@
+pragathi_exercise.controller_demo:  #route name for controller
+  path: '/controller-demo' #this is the url for the controller
+  defaults:  #after passing the url what page it should load
+    _controller: '\Drupal\pragathi_exercise\Controller\ControllerDemo::demo' #this gives the path where the controller file is present
+    _title: 'controller demo' #title for the controller page
+  requirements:
+    _permission: "access content"  #this page is accessible for all the users
+
+
+pragathi_exercise.custom_demo:  #route name for custom form
+  path: "/custom-demo"  #this is the url for the custom form
+  defaults:
+    _form: '\Drupal\pragathi_exercise\Form\CustomDemo'  #this gives the path where the custom file is present
+    _title: "user details "  #title for the custom page
+  requirements:
+    _permission: "access content" #this page is accessible for all the users
+
+
+pragathi_exercise.config_demo:  #route name for config form
+  path: '/config-demo'  #this is the url for the config form
+  defaults:
+    _form: '\Drupal\pragathi_exercise\Form\ConfigDemo'  #this gives the path where the config file is present
+    _title: 'user details'  #title for the config page
+  requirements:
+    _permission: 'config form permission'  #this permission is set for specific roles like who can access the form
+  options:
+    _admin_route: TRUE  #gives the admin theme claro

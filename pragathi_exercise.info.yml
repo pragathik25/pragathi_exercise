@@ -1,0 +1,7 @@
+name: 'exercise module' #name for the module that appears on the extend page
+description: 'exercise module description' #description for the module
+type: module   #which type like if module then module,it can theme,profile etc
+core_version_requirement: ^9 || ^10  #which verion of drupal it will support
+version: 9.x-1.0   #specific version
+
+

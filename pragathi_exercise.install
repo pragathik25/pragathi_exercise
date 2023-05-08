@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * Implement hook_schema().
+ */
+
+function pragathi_exercise_schema() {   #to create a table in database
+    $schema['custom_demo'] = [  #table name
+        'description' => 'custom user details',
+        'fields' => [
+            'id' => [
+                'description' => 'Holds the id',
+                'type' => 'serial',
+                'not null' => true,
+                'unsigned' => true,
+            ],
+            'name' => [
+                'description' => 'user name',
+                'type' => 'varchar',
+                'length' => 50,
+                'not null' => true,
+            ],
+            'usn' => [
+                'description' => 'User usn',
+                'type' => 'varchar',
+                'length' => 50,
+                'not null' => true,
+            ],
+            'email' => [
+                'description' => 'User email',
+                'type' => 'varchar',
+                'length' => 50,
+                'not null' => true,
+            ],
+            'place'=>[
+                'description'=>'place of the user',
+                'type'=>'varchar',
+                'length'=>60,
+                'not null'=>true,
+            ],
+        ],
+        'primary key' => ['id'],  #unique and not null
+    ];
+    return $schema; #this will return the values submit in the form to db
+}
