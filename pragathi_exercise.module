@@ -1,6 +1,6 @@
 <?php
 use Drupal\Core\Form\FormStateInterface;  #since hook_form_alter is used to deal with forms we need to include this inetrface
-
+use Drupal\pragathi_exercise\Event\UserLoginEvent;
 /**
  * implements hook_form_alter
  */
@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;  #since hook_form_alter is used to deal
 function pragathi_exercise_form_alter(&$form,FormStateInterface $form_state, $form_id) {
      $data = \Drupal::service('custom_service')->getName();  //calling the service which we have created
   // print_r($data);
-   }
+}
 
 
 
@@ -27,4 +27,16 @@ function pragathi_exercise_theme($existing, $type, $theme, $path) {  //hook_them
     ],
 ];
 
+}
+
+/**
+ * Implements hook_user_login().
+ */
+function pragathi_exercise_user_login($account) {
+    // Instantiate our event.
+    $event = new UserLoginEvent($account);
+
+    =
+    $event_dispatcher = \Drupal::service('event_dispatcher'); //triggering the event_dispatcher service and dispatch the event.
+    $event_dispatcher->dispatch($event, UserLoginEvent::EVENT_NAME);
 }

@@ -3,7 +3,12 @@ services:  #to create a service
     class : Drupal\pragathi_exercise\CustomService #where the service file is present
     arguments: ['@config.factory'] #using other service
 
-  events_subscriber: #intialiing the eventsubscriber
+  events_subscriber: #creating a eventsubscriber
     class: '\Drupal\pragathi_exercise\EventSubscriber\EventsSubscriberDemo' #where the file is present
+    tags:
+      - { name: 'event_subscriber' } # to use event subscriber
+
+  pragathi_exercise_user_login: #creating a eventsubscriber
+    class: '\Drupal\pragathi_exercise\EventSubscriber\UserLoginDemo' #where the file is present
     tags:
       - { name: 'event_subscriber' } # to use event subscriber
