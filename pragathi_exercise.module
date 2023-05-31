@@ -35,8 +35,6 @@ function pragathi_exercise_theme($existing, $type, $theme, $path) {  //hook_them
 function pragathi_exercise_user_login($account) {
     // Instantiate our event.
     $event = new UserLoginEvent($account);
-
-    =
     $event_dispatcher = \Drupal::service('event_dispatcher'); //triggering the event_dispatcher service and dispatch the event.
     $event_dispatcher->dispatch($event, UserLoginEvent::EVENT_NAME);
 }

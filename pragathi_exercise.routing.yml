@@ -25,3 +25,11 @@ pragathi_exercise.config_demo:  #route name for config form
     _permission: 'config form permission'  #this permission is set for specific roles like who can access the form
   options:
     _admin_route: TRUE  #gives the admin theme claro
+
+pragathi_exercise.ajaxdemo: #route name for dropdown
+  path: '/dropdown-demo' #this the url for dropdown
+  defaults:
+    _form: '\Drupal\pragathi_exercise\Form\DropdownForm' # path where the file is present
+    _title: 'ajax practice demo' #title for dropdown
+  requirements:
+    _permission: 'access content' #accessible for all the users

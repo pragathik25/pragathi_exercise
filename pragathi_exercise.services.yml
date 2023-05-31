@@ -12,3 +12,9 @@ services:  #to create a service
     class: '\Drupal\pragathi_exercise\EventSubscriber\UserLoginDemo' #where the file is present
     tags:
       - { name: 'event_subscriber' } # to use event subscriber
+
+  pragathi_exercise.commands:
+    class: \Drupal\custom_drush\Commands\DrushCommandsDemo
+    arguments: ['@entity_type.manager']
+    tags:
+      - { name: drush.command }
