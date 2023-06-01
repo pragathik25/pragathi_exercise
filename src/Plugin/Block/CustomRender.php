@@ -19,8 +19,9 @@ class CustomRender extends BlockBase {
      */
 
     public function build(){
-        $form = \Drupal::formBuilder()->getForm('Drupal\pragathi_exercise\Form\CustomDemo'); //this service will return customform in the block
-
+        $form['custom'] = \Drupal::formBuilder()->getForm('Drupal\pragathi_exercise\Form\CustomDemo'); //this service will return customform in the block
+        $form['config'] = \Drupal::formBuilder()->getForm('Drupal\pragathi_exercise\Form\ConfigDemo'); //this service will return config form in the block
         return $form;
+        }
+
     }
-}
