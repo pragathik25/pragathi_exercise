@@ -13,8 +13,8 @@ services:  #to create a service
     tags:
       - { name: 'event_subscriber' } # to use event subscriber
 
-  pragathi_exercise.commands:
-    class: \Drupal\custom_drush\Commands\DrushCommandsDemo
-    arguments: ['@entity_type.manager']
+  pragathi_exercise.commands:  #creating a drush command
+    class: \Drupal\pragathi_exercise\Commands\DrushCommandsDemo #where the file is present
+    arguments: ['@entity_type.manager']  #including the argumenet
     tags:
-      - { name: drush.command }
+      - { name: drush.command }   #to use drushcommand
