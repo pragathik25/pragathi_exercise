@@ -40,7 +40,7 @@ class DrushCommandsDemo extends DrushCommands {  //extending the base class
           'id' => $node->id(), //returns node id
           'title' => $node->getTitle(), //returns the title
         ];
-    }
+  }
         return new RowsOfFields($rows); //output will be displayed in rows
     }
   }
