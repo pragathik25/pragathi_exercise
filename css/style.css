@@ -2,4 +2,13 @@ span{
     color: red;
 }
 
-/*styling for the field which we have declared in config form
+/*styling for the field which we have declared in config*/
+
+p {
+    color: green;
+    font-weight: bold;
+}
+
+h1 {
+    color:maroon;
+}

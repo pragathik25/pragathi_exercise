@@ -38,3 +38,18 @@ function pragathi_exercise_user_login($account) {
     $event_dispatcher = \Drupal::service('event_dispatcher'); //triggering the event_dispatcher service and dispatch the event.
     $event_dispatcher->dispatch($event, UserLoginEvent::EVENT_NAME);
 }
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function pragathi_exercise_page_attachments_alter(array &$attachments) {
+    $route_match = \Drupal::routeMatch(); //calling the service
+    $route_name = $route_match->getRouteName();  //getting the route name of the particular page
+    //print_r($route_name);exit;
+    if ($route_name === 'comment.admin') { //if the route name matches
+        $attachments['#attached']['library'][] = 'pragathi_exercise/config_lib'; //apply the css
+    }
+    elseif ($route_name === 'entity.node.canonical') { //if the route name matches
+        $attachments['#attached']['library'][] = 'pragathi_exercise/config_lib'; //apply the css
+    }
+}
