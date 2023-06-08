@@ -1,11 +1,14 @@
 <?php
 
-namespace Drupal\pragathi_exercise\Plugin\Field\FieldFormatter; //namespace for FieldFormatter
+namespace Drupal\pragathi_exercise\Plugin\Field\FieldFormatter;
 
-use Drupal\Core\Field\FormatterBase; //used as baseclass
-use Drupal\Core\Field\FieldItemListInterface;  //interface for field
-use Drupal\Core\Form\FormStateInterface; //interface for form
-
+// Namespace for FieldFormatter.
+// Used as baseclass.
+use Drupal\Core\Field\FormatterBase;
+// Interface for field.
+use Drupal\Core\Field\FieldItemListInterface;
+// Interface for form.
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Define the "custom field formatter".
@@ -19,55 +22,60 @@ use Drupal\Core\Form\FormStateInterface; //interface for form
  *   }
  * )
  */
+class CustomFormatter extends FormatterBase {
+  // Extending the baseclass.
 
+  /**
+   * {@inheritdoc}
+   */
+  public static function defaultSettings() {
+    return [
+      'concat' => 'Concat with ',
+    // Will return the defaultSettings value.
+    ] + parent::defaultSettings();
+  }
 
-class CustomFormatter extends FormatterBase { //extending the baseclass
+  /**
+   * {@inheritdoc}
+   */
+  public function settingsForm(array $form, FormStateInterface $form_state) {
+    // Appears on setting of manage display.
+    // Creating a form.
+    $form['concat'] = [
+    // Textfield type.
+      '#type' => 'textfield',
+    // Title.
+      '#title' => 'Concatenate with',
+    // Default value is set.
+      '#default_value' => $this->getSetting('concat'),
+    ];
+    return $form;
+  }
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function defaultSettings() {
-        return [
-            'concat' => 'Concat with ',
-        ] + parent::defaultSettings(); //will return the defaultSettings value
+  /**
+   * {@inheritdoc}
+   */
+  public function settingsSummary() {
+    $summary = [];
+    // Will concatenate with @concat
+    $summary[] = $this->t("concatenate with : @concat", ["@concat" => $this->getSetting('concat')]);
+    return $summary;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function viewElements(FieldItemListInterface $items, $langcode) {
+    $element = [];
+
+    foreach ($items as $delta => $item) {
+      // Delta is for cardinality.
+      $element[$delta] = [
+      // Will return concat and value submited in the frontend.
+        '#markup' => $this->getSetting('concat') . $item->value,
+      ];
     }
-
-    /**
-     * {@inheritdoc}
-     */
-
-    public function settingsForm(array $form, FormStateInterface $form_state) { ////appears on setting of manage display
-        $form['concat'] =[ //creating a form
-            '#type' => 'textfield', //textfield type
-            '#title' => 'Concatenate with', //title
-            '#default_value' => $this->getSetting('concat'), //default value is set
-        ];
-        return $form;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function settingsSummary() {
-        $summary = [];
-        $summary[] = $this->t("concatenate with : @concat", ["@concat" => $this->getSetting('concat')]); //will concatenate with @concat
-        return $summary;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-
-     public function viewElements(FieldItemListInterface $items, $langcode) {
-        $element = [];
-
-        foreach ( $items as $delta => $item) {
-//delta is for cardinality
-            $element[$delta] = [
-                 '#markup' => $this->getSetting('concat') . $item->value, //will return concat and value submited in the frontend
-            ];
-        }
-        return $element;
-     }
+    return $element;
+  }
 
 }

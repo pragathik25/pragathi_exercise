@@ -1,22 +1,34 @@
 <?php
 
-namespace Drupal\pragathi_exercise\Commands;  //namespace
+namespace Drupal\pragathi_exercise\Commands;
 
-use Consolidation\OutputFormatters\StructuredData\RowsOfFields; //to format the output usingRowsOfFields
-use Drush\Commands\DrushCommands; //used as base class
-use Drupal\Core\Entity\EntityTypeManagerInterface; //to use the service
+// Namespace.
+// To format the output usingRowsOfFields.
+use Consolidation\OutputFormatters\StructuredData\RowsOfFields;
+// Used as base class.
+use Drush\Commands\DrushCommands;
+// To use the service.
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 
-class DrushCommandsDemo extends DrushCommands {  //extending the base class
+/**
+ * Drush demo commands.
+ */
+class DrushCommandsDemo extends DrushCommands {
+  // Extending the base class.
+
   /**
+   * Comment.
+   *
    * @var Drupal\Core\Entity\EntityTypeManagerInterface $entityManager
    *    Entity manager service.
    */
-
-   public function __construct(EntityTypeManagerInterface $entityTypeManager) {
-    $this->entityManager = $entityTypeManager;  //to load the entity
+  public function __construct(EntityTypeManagerInterface $entityTypeManager) {
+    // To load the entity.
+    $this->entityManager = $entityTypeManager;
     parent::__construct();
   }
-/**
+
+  /**
    * Command that returns a list of all blocked users.
    *
    * @field-labels
@@ -31,19 +43,22 @@ class DrushCommandsDemo extends DrushCommands {  //extending the base class
    * @aliases get-title
    *
    * @return \Consolidation\OutputFormatters\StructuredData\RowsOfFields
+   *   description for return
    */
   public function drushDemo() {
-    $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'page']); //it will load nodes of type basic page
+    // It will load nodes of type basic page.
+    $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'page']);
     $rows = [];
-    foreach($nodes as $node) {
-        $rows[] = [
-          'id' => $node->id(), //returns node id
-          'title' => $node->getTitle(), //returns the title
-        ];
-  }
-        return new RowsOfFields($rows); //output will be displayed in rows
+    foreach ($nodes as $node) {
+      $rows[] = [
+      // Returns node id.
+        'id' => $node->id(),
+      // Returns the title.
+        'title' => $node->getTitle(),
+      ];
     }
+    // Output will be displayed in rows.
+    return new RowsOfFields($rows);
   }
 
-
-
+}

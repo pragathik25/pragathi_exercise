@@ -1,20 +1,25 @@
 <?php
 
-namespace Drupal\pragathi_exercise\EventSubscriber; //namespace for UserLoginDemo
-use Drupal\pragathi_exercise\Event\UserLoginEvent; //to use the custom Event created
-use Symfony\Component\EventDispatcher\EventSubscriberInterface; //used as base class
+namespace Drupal\pragathi_exercise\EventSubscriber;
+
+// To use the custom Event created.
+use Drupal\pragathi_exercise\Event\UserLoginEvent;
+// Used as base class.
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class UserLoginSubscriber.
  *
  * @package Drupal\pragathi_exercise\EventSubscriber
  */
-class UserLoginDemo implements EventSubscriberInterface { //extending the base class
+class UserLoginDemo implements EventSubscriberInterface {
+  // Extending the base class.
 
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() { //calling the getSubscribedEvents function
+  public static function getSubscribedEvents() {
+    // Calling the getSubscribedEvents function.
     return [
       // Static class constant => method on this class.
       UserLoginEvent::EVENT_NAME => 'onUserLogin',
@@ -28,15 +33,20 @@ class UserLoginDemo implements EventSubscriberInterface { //extending the base c
    *   Our custom general object.
    */
   public function onUserLogin(UserLoginEvent $event) {
-    $database = \Drupal::database(); //using the service of database
-    $dateFormatter = \Drupal::service('date.formatter'); //using the service to get date.formatter
+    // Using the service of database.
+    $database = \Drupal::database();
+    // Using the service to get date.formatter.
+    $dateFormatter = \Drupal::service('date.formatter');
 
-    $account_created = $database->select('users_field_data', 'ud') //selecting the table from db
-      ->fields('ud', ['created'])  //returns when the account was created
-      ->condition('ud.uid', $event->account->id())  //returns the userid
+    // Selecting the table from db.
+    $account_created = $database->select('users_field_data', 'ud')
+    // Returns when the account was created.
+      ->fields('ud', ['created'])
+    // Returns the userid.
+      ->condition('ud.uid', $event->account->id())
       ->execute()
       ->fetchField();
-    //using message service to get message whenever user logs in
+    // Using message service to get message whenever user logs in.
     \Drupal::messenger()->addStatus(t('Welcome to the site, your account was created on %created_date.', [
       '%created_date' => $dateFormatter->format($account_created, 'long'),
     ]));

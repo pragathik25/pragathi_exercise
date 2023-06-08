@@ -1,0 +1,5 @@
+{
+    "phpcs.executablePath": "",
+    "phpcbf.executablePath": "",
+    "phpcbf.onsave": false
+}

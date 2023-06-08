@@ -1,33 +1,36 @@
 <?php
 
-namespace Drupal\pragathi_exercise\Event; //namespace for UserLoginEvent
+namespace Drupal\pragathi_exercise\Event;
 
-use Drupal\Component\EventDispatcher\Event; //used as base class
-use Drupal\user\UserInterface; //to get user details
+// Used as base class.
+use Drupal\Component\EventDispatcher\Event;
+// To get user details.
+use Drupal\user\UserInterface;
 
 /**
  * Event that is fired when a user logs in.
  */
-class UserLoginEvent extends Event {  //extending the base class
-
+class UserLoginEvent extends Event {
+  // Extending the base class
   // This makes it easier for subscribers to reliably use our event name.
-const EVENT_NAME = 'custom_events_user_login';
+  const EVENT_NAME = 'custom_events_user_login';
 
-/**
+  /**
    * The user account.
    *
    * @var \Drupal\user\UserInterface
    */
-public $account;
+  public $account;
 
-/**
+  /**
    * Constructs the object.
    *
    * @param \Drupal\user\UserInterface $account
    *   The account of the user logged in.
    */
-public function __construct(UserInterface $account) {
-    $this->account = $account;  //will return the user account
-}
+  public function __construct(UserInterface $account) {
+    // Will return the user account.
+    $this->account = $account;
+  }
 
 }

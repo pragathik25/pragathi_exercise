@@ -43,3 +43,14 @@ function pragathi_exercise_schema() {   #to create a table in database
     ];
     return $schema; #this will return the values submit in the form to db
 }
+/*
+ * Implement hook_update_N().
+ */
+/**
+ * TO MAKE CHANGES ON CONFIG FORM
+ */
+function pragathi_exercise_update_100305() {
+    $config = \Drupal::configFactory()->getEditable('pragathi_exercise.settings');
+    $config->set('name','PRAGATHI K');
+    $config->save();
+}

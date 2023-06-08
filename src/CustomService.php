@@ -1,11 +1,12 @@
 <?php
 
-namespace Drupal\pragathi_exercise; //namespace for customservice
+namespace Drupal\pragathi_exercise;
 
-use Drupal\Core\Config\ConfigFactory; //including the configfactory service
+// Including the configfactory service.
+use Drupal\Core\Config\ConfigFactory;
 
 /**
- * Class CustomService.
+ * Class Description.
  *
  * @package Drupal\pragathi_exercise\Services
  */
@@ -21,7 +22,8 @@ class CustomService {
   /**
    * Constructor.
    */
-  public function __construct(ConfigFactory $configFactory) {  //assigning the variable
+  public function __construct(ConfigFactory $configFactory) {
+    // Assigning the variable.
     $this->configFactory = $configFactory;
   }
 
@@ -29,8 +31,10 @@ class CustomService {
    * Gets my setting.
    */
   public function getName() {
-    $config = $this->configFactory->get('pragathi_exercise.settings'); //to get the values submiiting in config form
-    return $config->get('NAME'); //will return the name value submitted in configform
+    // To get the values submiiting in config form.
+    $config = $this->configFactory->get('pragathi_exercise.settings');
+    // Will return the name value submitted in configform.
+    return $config->get('NAME');
   }
 
 }

@@ -1,20 +1,31 @@
 <?php
-namespace Drupal\pragathi_exercise\Controller; //namepsace for controllerdemo can be used in otherfile
 
-use Drupal\Core\Controller\ControllerBase; //base class for controllerdemo
-use Drupal\pragathi_exercise\CustomService; //to include custom_service
+namespace Drupal\pragathi_exercise\Controller;
 
-class ControllerDemo extends ControllerBase{ //extending the base class
+// Base class for controllerdemo.
+use Drupal\Core\Controller\ControllerBase;
 
-    public function demo() { //defining a function demo()
+/**
+ * To include custom_service.
+ */
+class ControllerDemo extends ControllerBase {
+  // Extending the base class.
 
-       $data = \Drupal::service('custom_service')->getName(); //calling the service
-        return [
-            '#theme'=>'controller_template', //rendering the template
-            '#message'=>$data, //service value is passed
-            '#hexcode'=>'#FF0000', //setting the hexcode color
-        ];
-    }
+  /**
+   * Class declaration.
+   */
+  public function demo() {
+    // Defining a function demo()
+    // Calling the service.
+    $data = \Drupal::service('custom_service')->getName();
+    return [
+    // Rendering the template.
+      '#theme' => 'controller_template',
+    // Service value is passed.
+      '#message' => $data,
+    // Setting the hexcode color.
+      '#hexcode' => '#FF0000',
+    ];
+  }
+
 }
-
-
