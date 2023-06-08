@@ -41,7 +41,7 @@ class EventsSubscriberDemo implements EventSubscriberInterface {
   }
 
   /**
-   * Class name.
+   * Function name.
    */
   public function configDelete(ConfigCrudEvent $event) {
     // Function for configDelete.

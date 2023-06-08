@@ -49,7 +49,7 @@ function pragathi_exercise_schema() {   #to create a table in database
 /**
  * TO MAKE CHANGES ON CONFIG FORM
  */
-function pragathi_exercise_update_100305() {
+function pragathi_exercise_update_100408() {
     $config = \Drupal::configFactory()->getEditable('pragathi_exercise.settings');
     $config->set('name','PRAGATHI K');
     $config->save();
