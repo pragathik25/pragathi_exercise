@@ -1,55 +1,66 @@
 <?php
-use Drupal\Core\Form\FormStateInterface;  #since hook_form_alter is used to deal with forms we need to include this inetrface
-use Drupal\pragathi_exercise\Event\UserLoginEvent;
+
 /**
- * implements hook_form_alter
+ * @file
+ * Implements different hook().
  */
 
-function pragathi_exercise_form_alter(&$form,FormStateInterface $form_state, $form_id) {
-     $data = \Drupal::service('custom_service')->getName();  //calling the service which we have created
-  // print_r($data);
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\pragathi_exercise\Event\UserLoginEvent;
+
+/**
+ * Implements hook_form_alter().
+ */
+function pragathi_exercise_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Calling theservice.
+  $data = \Drupal::service('custom_service')->getName();
 }
-
-
-
 
 /**
  * Implements hook_theme().
  */
-function pragathi_exercise_theme($existing, $type, $theme, $path) {  //hook_theme is to create a template
-
-    return [
-        'controller_template' => [  //template name
-        'variables' => [            //what are all the variables we want to render in the twig template
-            'message' => "",
-            'hexcode' => "",
-        ],
+function pragathi_exercise_theme($existing, $type, $theme, $path) {
+  // Hook_theme is to create a template.
+  return [
+    // Template name.
+    'controller_template' => [
+      // What are all the variables we want to render in the twig template.
+      'variables' => [
+        'message' => "",
+        'hexcode' => "",
+      ],
     ],
-];
-
+  ];
 }
 
 /**
  * Implements hook_user_login().
  */
 function pragathi_exercise_user_login($account) {
-    // Instantiate our event.
-    $event = new UserLoginEvent($account);
-    $event_dispatcher = \Drupal::service('event_dispatcher'); //triggering the event_dispatcher service and dispatch the event.
-    $event_dispatcher->dispatch($event, UserLoginEvent::EVENT_NAME);
+  // Instantiate our event.
+  $event = new UserLoginEvent($account);
+  // Triggering the event_dispatcher service and dispatch the event.
+  $event_dispatcher = \Drupal::service('event_dispatcher');
+  $event_dispatcher->dispatch($event, UserLoginEvent::EVENT_NAME);
 }
 
 /**
  * Implements hook_page_attachments_alter().
  */
 function pragathi_exercise_page_attachments_alter(array &$attachments) {
-    $route_match = \Drupal::routeMatch(); //calling the service
-    $route_name = $route_match->getRouteName();  //getting the route name of the particular page
-    //print_r($route_name);exit;
-    if ($route_name === 'comment.admin') { //if the route name matches
-        $attachments['#attached']['library'][] = 'pragathi_exercise/config_lib'; //apply the css
-    }
-    elseif ($route_name === 'entity.node.canonical') { //if the route name matches
-        $attachments['#attached']['library'][] = 'pragathi_exercise/config_lib'; //apply the css
-    }
+  // Calling the service.
+  $route_match = \Drupal::routeMatch();
+  // Getting the route name of the particular page.
+  $route_name = $route_match->getRouteName();
+  // print_r($route_name);exit;
+  // If the route name matches.
+  if ($route_name === 'comment.admin') {
+    // Apply the css.
+    $attachments['#attached']['library'][] = 'pragathi_exercise/config_lib';
+  }
+  // If the route name matches.
+  elseif ($route_name === 'entity.node.canonical') {
+    // Apply the css.
+    $attachments['#attached']['library'][] = 'pragathi_exercise/config_lib';
+  }
 }

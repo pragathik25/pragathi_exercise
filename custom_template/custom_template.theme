@@ -1,13 +1,17 @@
 <?php
 
+/**
+ * @file
+ * Implement hook_suggestion_HOOK_alter.
+ */
 
-// function custom_template_preprocess_node(&$variables){
-//     $variables["value"]="hello world";
-// }
-function custom_template_theme_suggestions_node_alter(array &$suggestions,array $variables){
-   // exit;
-   //print_r($suggestions);exit;
-    if (\Drupal::currentUser() -> isAnonymous()) {
-        $suggestions[]="node__anonymous";
-    }
+/**
+ * Function.
+ */
+function custom_template_theme_suggestions_node_alter(array &$suggestions, array $variables) {
+  // exit;
+  // print_r($suggestions);exit;
+  if (\Drupal::currentUser()->isAnonymous()) {
+    $suggestions[] = "node__anonymous";
+  }
 }

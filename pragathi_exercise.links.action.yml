@@ -3,4 +3,3 @@ custom_button.config:  #basically to create a button
   title: "config form"
   appears_on:
     - "pragathi_exercise.custom_demo" #on which page we want to place the button i.e custom form
-

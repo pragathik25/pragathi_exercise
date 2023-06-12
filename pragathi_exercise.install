@@ -1,56 +1,66 @@
 <?php
 
 /**
+ * @file
  * Implement hook_schema().
  */
 
-function pragathi_exercise_schema() {   #to create a table in database
-    $schema['custom_demo'] = [  #table name
-        'description' => 'custom user details',
-        'fields' => [
-            'id' => [
-                'description' => 'Holds the id',
-                'type' => 'serial',
-                'not null' => true,
-                'unsigned' => true,
-            ],
-            'name' => [
-                'description' => 'user name',
-                'type' => 'varchar',
-                'length' => 50,
-                'not null' => true,
-            ],
-            'usn' => [
-                'description' => 'User usn',
-                'type' => 'varchar',
-                'length' => 50,
-                'not null' => true,
-            ],
-            'email' => [
-                'description' => 'User email',
-                'type' => 'varchar',
-                'length' => 50,
-                'not null' => true,
-            ],
-            'place'=>[
-                'description'=>'place of the user',
-                'type'=>'varchar',
-                'length'=>60,
-                'not null'=>true,
-            ],
-        ],
-        'primary key' => ['id'],  #unique and not null
-    ];
-    return $schema; #this will return the values submit in the form to db
+/**
+ * Hook.
+ */
+function pragathi_exercise_schema() {
+  // To create a table in database.
+  // Table name.
+  $schema['custom_demo'] = [
+    'description' => 'custom user details',
+    'fields' => [
+      'id' => [
+        'description' => 'Holds the id',
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+      ],
+      'name' => [
+        'description' => 'user name',
+        'type' => 'varchar',
+        'length' => 50,
+        'not null' => TRUE,
+      ],
+      'usn' => [
+        'description' => 'User usn',
+        'type' => 'varchar',
+        'length' => 50,
+        'not null' => TRUE,
+      ],
+      'email' => [
+        'description' => 'User email',
+        'type' => 'varchar',
+        'length' => 50,
+        'not null' => TRUE,
+      ],
+      'place' => [
+        'description' => 'place of the user',
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+      ],
+    ],
+    // Unique and not null.
+    'primary key' => ['id'],
+  ];
+  // This will return the values submit in the form to db.
+  return $schema;
 }
+
 /*
  * Implement hook_update_N().
  */
+
 /**
- * TO MAKE CHANGES ON CONFIG FORM
+ * TO MAKE CHANGES ON CONFIG FORM.
  */
 function pragathi_exercise_update_100408() {
-    $config = \Drupal::configFactory()->getEditable('pragathi_exercise.settings');
-    $config->set('name','PRAGATHI K');
-    $config->save();
+  $config = \Drupal::configFactory()->getEditable('pragathi_exercise.settings');
+  $config->set('name', 'PRAGATHI K');
+  $config->save();
 }

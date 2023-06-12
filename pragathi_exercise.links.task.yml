@@ -16,10 +16,3 @@ pragathi_exercise.controller_demo:
   title : controller demo #title for the tab
   base_route: pragathi_exercise.controller_demo #where the tab should be placed
   weight: 33
-
-
-
-
-
-
-

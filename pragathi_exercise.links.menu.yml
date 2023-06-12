@@ -2,4 +2,3 @@ system.admin_view:   #which page we want to configure the controller menu
   title: controller  #title for the menu
   route_name: pragathi_exercise.controller_demo #where it should be redirected
   parent: system.admin #parent for that menu
-
