@@ -3,28 +3,28 @@
 namespace Drupal\pragathi_exercise;
 
 // Including the configfactory service.
-use Drupal\Core\Config\ConfigFactory;
+use Drupal\Core\Config\ConfigFactoryInterface;
 
 /**
  * Class Description.
- *
- * @package Drupal\pragathi_exercise\Services
  */
 class CustomService {
 
   /**
-   * Configuration Factory.
+   * The config factory service.
    *
-   * @var \Drupal\Core\Config\ConfigFactory
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
   protected $configFactory;
 
   /**
-   * Constructor.
+   * Constructor for the ConfigHelper service.
+   *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   The config factory service.
    */
-  public function __construct(ConfigFactory $configFactory) {
-    // Assigning the variable.
-    $this->configFactory = $configFactory;
+  public function __construct(ConfigFactoryInterface $config_factory) {
+    $this->configFactory = $config_factory;
   }
 
   /**
@@ -32,9 +32,8 @@ class CustomService {
    */
   public function getName() {
     // To get the values submiiting in config form.
-    $config = $this->configFactory->get('pragathi_exercise.settings');
+    return $this->configFactory->getEditable('pragathi_exercise.settings')->get('name');
     // Will return the name value submitted in configform.
-    return $config->get('NAME');
   }
 
 }
