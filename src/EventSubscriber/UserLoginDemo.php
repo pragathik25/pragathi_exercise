@@ -7,14 +7,15 @@ use Drupal\pragathi_exercise\Event\UserLoginEvent;
 // Used as base class.
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-/**
- * Class UserLoginSubscriber.
- *
- * @package Drupal\pragathi_exercise\EventSubscriber
- */
+
 class UserLoginDemo implements EventSubscriberInterface {
   // Extending the base class.
 
+/**
+  * Class UserLoginSubscriber.
+  *
+  * @package Drupal\pragathi_exercise\EventSubscriber
+  */
   /**
    * {@inheritdoc}
    */

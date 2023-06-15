@@ -7,12 +7,30 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 // Defines event for the configuration system.
 use Drupal\Core\Config\ConfigEvents;
 use Drupal\Core\Config\ConfigCrudEvent;
+use Drupal\Core\Messenger\MessengerInterface;
+
 
 /**
  * Description for class.
  */
-class EventsSubscriberDemo implements EventSubscriberInterface {
+class EventsSubscriberDemo implements EventSubscriberInterface  {
   // Extending the baseclass.
+/**
+     * The Messenger service.
+     *
+     * @var \Drupal\Core\Messenger\MessengerInterface
+     */
+    protected $messenger;
+
+    /**
+     * Constructs InviteByEmail .
+     *
+     * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+     *   The messenger service.
+     */
+    public function __construct(MessengerInterface $messenger) {
+      $this->messenger = $messenger;
+    }
 
   /**
    * {@inheritdoc}
@@ -37,7 +55,7 @@ class EventsSubscriberDemo implements EventSubscriberInterface {
     // Return the Config Object.
     $config = $event->getConfig();
     // Messenger service is called.
-    \Drupal::messenger()->addStatus('Saved config: ' . $config->getName());
+    $this->messenger->addStatus('Saved config: ' . $config->getName());
   }
 
   /**
@@ -48,7 +66,7 @@ class EventsSubscriberDemo implements EventSubscriberInterface {
     // Return the Config Object.
     $config = $event->getConfig();
     // Messenger service is called.
-    \Drupal::messenger()->addStatus('Deleted config: ' . $config->getName());
+    $this->messenger->addStatus('Deleted config: ' . $config->getName());
   }
 
 }

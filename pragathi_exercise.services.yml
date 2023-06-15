@@ -5,11 +5,13 @@ services:  #to create a service
 
   events_subscriber: #creating a eventsubscriber
     class: '\Drupal\pragathi_exercise\EventSubscriber\EventsSubscriberDemo' #where the file is present
+    arguments: ['@messenger']
     tags:
       - { name: 'event_subscriber' } # to use event subscriber
 
   pragathi_exercise_user_login: #creating a eventsubscriber
     class: '\Drupal\pragathi_exercise\EventSubscriber\UserLoginDemo' #where the file is present
+    arguments: ['@messenger']
     tags:
       - { name: 'event_subscriber' } # to use event subscriber
 
