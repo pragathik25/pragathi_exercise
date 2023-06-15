@@ -23,7 +23,7 @@ class DropdownForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $country_id = $form_state->getValue("country");
-    print_r($country);
+
     $state_id = $form_state->getValue("state");
 
     $form['country'] = [

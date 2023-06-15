@@ -9,28 +9,23 @@ use Drupal\Core\Config\ConfigEvents;
 use Drupal\Core\Config\ConfigCrudEvent;
 use Drupal\Core\Messenger\MessengerInterface;
 
-
 /**
  * Description for class.
  */
-class EventsSubscriberDemo implements EventSubscriberInterface  {
-  // Extending the baseclass.
-/**
-     * The Messenger service.
-     *
-     * @var \Drupal\Core\Messenger\MessengerInterface
-     */
-    protected $messenger;
+class EventsSubscriberDemo implements EventSubscriberInterface {
+  /**
+   * Extending the baseclass.
+   *
+   * @var Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
 
-    /**
-     * Constructs InviteByEmail .
-     *
-     * @param \Drupal\Core\Messenger\MessengerInterface $messenger
-     *   The messenger service.
-     */
-    public function __construct(MessengerInterface $messenger) {
-      $this->messenger = $messenger;
-    }
+  /**
+   * Function.
+   */
+  public function __construct(MessengerInterface $messenger) {
+    $this->messenger = $messenger;
+  }
 
   /**
    * {@inheritdoc}
@@ -55,7 +50,7 @@ class EventsSubscriberDemo implements EventSubscriberInterface  {
     // Return the Config Object.
     $config = $event->getConfig();
     // Messenger service is called.
-    $this->messenger->addStatus('Saved config: ' . $config->getName());
+    $this->messenger->addMessage('Saved config: ' . $config->getName());
   }
 
   /**
@@ -66,7 +61,7 @@ class EventsSubscriberDemo implements EventSubscriberInterface  {
     // Return the Config Object.
     $config = $event->getConfig();
     // Messenger service is called.
-    $this->messenger->addStatus('Deleted config: ' . $config->getName());
+    $this->messenger->addMessage('Deleted config: ' . $config->getName());
   }
 
 }
