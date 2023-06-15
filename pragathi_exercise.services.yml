@@ -13,7 +13,7 @@ services:  #to create a service
     class: '\Drupal\pragathi_exercise\EventSubscriber\UserLoginDemo' #where the file is present
     tags:
       - { name: 'event_subscriber' } # to use event subscriber
-    arguments: ['@messenger','@database']
+    arguments: ['@database','@date.formatter','@messenger']
 
   pragathi_exercise.commands:  #creating a drush command
     class: \Drupal\pragathi_exercise\Commands\DrushCommandsDemo #where the file is present

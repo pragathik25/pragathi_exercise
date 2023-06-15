@@ -7,19 +7,28 @@ use Drupal\pragathi_exercise\Event\UserLoginEvent;
 // Used as base class.
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Drupal\Core\Database\Connection;
+use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 
 /**
- * Function.
+ * Class.
  */
 class UserLoginDemo implements EventSubscriberInterface {
   // Extending the base class.
+
   /**
-   * The database connection.
+   * The database service.
    *
    * @var \Drupal\Core\Database\Connection
    */
   protected $database;
+
+  /**
+   * The date formatter service.
+   *
+   * @var \Drupal\Core\Datetime\DateFormatterInterface
+   */
+  protected $dateFormatter;
 
   /**
    * The messenger service.
@@ -29,15 +38,18 @@ class UserLoginDemo implements EventSubscriberInterface {
   protected $messenger;
 
   /**
-   * CustomConfigEventsSubscriber constructor.
+   * UserLoginDemo constructor.
    *
    * @param \Drupal\Core\Database\Connection $database
-   *   The database connection.
+   *   The database service.
+   * @param \Drupal\Core\Datetime\DateFormatterInterface $dateFormatter
+   *   The date formatter service.
    * @param \Drupal\Core\Messenger\MessengerInterface $messenger
    *   The messenger service.
    */
-  public function __construct(Connection $database, MessengerInterface $messenger) {
+  public function __construct(Connection $database, DateFormatterInterface $dateFormatter, MessengerInterface $messenger) {
     $this->database = $database;
+    $this->dateFormatter = $dateFormatter;
     $this->messenger = $messenger;
   }
 
@@ -46,7 +58,7 @@ class UserLoginDemo implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents() {
     return [
-      /* Static class constant => method on this class. */
+      // Static class constant => method on this class.
       UserLoginEvent::EVENT_NAME => 'onUserLogin',
     ];
   }
@@ -54,23 +66,23 @@ class UserLoginDemo implements EventSubscriberInterface {
   /**
    * Subscribe to the user login event dispatched.
    *
-   * @param \Drupal\pragathi_excercise\Event\UserLoginEvent $event
-   *   Our custom event object.
+   * @param \Drupal\pragathi_exercise\Event\UserLoginEvent $event
+   *   Our custom general object.
    */
   public function onUserLogin(UserLoginEvent $event) {
-    // Format timestamp into date time.
-    $dateFormatter = \Drupal::service('date.formatter');
-
-    // Fetch user data.
+    // Selecting the table from db.
     $account_created = $this->database->select('users_field_data', 'ud')
       // Returns when the account was created.
       ->fields('ud', ['created'])
-      // Returns user id.
+      // Returns the userid.
       ->condition('ud.uid', $event->account->id())
       ->execute()
       ->fetchField();
 
-    $this->messenger->addStatus(t('Welcome to the site, your account was created on %created_date.', ['%created_date' => $dateFormatter->format($account_created, 'short')]));
+    // Using message service to get message whenever user logs in.
+    $this->messenger->addStatus(t('Welcome to the site, your account was created on %created_date.', [
+      '%created_date' => $this->dateFormatter->format($account_created, 'long'),
+    ]));
   }
 
 }
