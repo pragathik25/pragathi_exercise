@@ -33,3 +33,17 @@ pragathi_exercise.ajaxdemo: #route name for dropdown
     _title: 'ajax practice demo' #title for dropdown
   requirements:
     _permission: 'access content' #accessible for all the users
+
+pragathi_exercise.dynamicdemo:
+  path: '/node/{node}/title'
+  defaults:
+    _controller: '\Drupal\pragathi_exercise\Controller\ControllerClone::nodeTitle'
+    _title_callback: '\Drupal\pragathi_exercise\Controller\ControllerClone::nodeTitlePageTitle'
+  requirements:
+    _custom_access: '\Drupal\pragathi_exercise\Controller\ControllerClone::accessNode'
+    _permission: 'Node Permission'
+  options:
+    _admin_route: TRUE
+    parameters:
+      node:
+        type: entity:node
