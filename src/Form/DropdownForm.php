@@ -4,12 +4,38 @@ namespace Drupal\pragathi_exercise\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Database\Database;
+use Drupal\Core\Database\Connection;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Implements the example form.
  */
 class DropdownForm extends FormBase {
+  /**
+   * The Messenger service.
+   *
+   * @var Drupal\Core\Database\Connection
+   */
+  protected $database;
+
+  /**
+   * Constructs InviteByEmail .
+   *
+   * @param \Drupal\Core\Database\Connection $database
+   *   The database service.
+   */
+  public function __construct(Connection $database) {
+    $this->database = $database;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('database'),
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -123,7 +149,7 @@ class DropdownForm extends FormBase {
    * Function to retrieve country options.
    */
   public function getCountryOptions() {
-    $query = Database::getConnection()->select('country', 'c');
+    $query = $this->database->select('country', 'c');
     $query->fields('c', ['id', 'name']);
     $result = $query->execute();
     $options = [];
@@ -138,7 +164,7 @@ class DropdownForm extends FormBase {
    * Function to retrieve state options.
    */
   public function getStateOptions($country_id) {
-    $query = Database::getConnection()->select('state', 's');
+    $query = $this->database->select('state', 's');
     $query->fields('s', ['id', 'country_id', 'name']);
     $query->condition('s.country_id', $country_id);
     $result = $query->execute();
@@ -154,7 +180,7 @@ class DropdownForm extends FormBase {
    * Function to retrieve district options.
    */
   public function getDistrictOptions($state_id) {
-    $query = Database::getConnection()->select('district', 'd');
+    $query = $this->database->select('district', 'd');
     $query->fields('d', ['id', 'state_id', 'name']);
     $query->condition('d.state_id', $state_id);
     $result = $query->execute();

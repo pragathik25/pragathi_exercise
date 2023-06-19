@@ -84,7 +84,6 @@ function pragathi_exercise_help($route_name, RouteMatchInterface $route_match) {
       $output .= '<h3>' . t('About') . '</h3>';
       $output .= '<p>' . t('How to send an email programmatically') . '</p>';
       return $output;
-
     default:
   }
 }

@@ -47,7 +47,7 @@ class DrushCommandsDemo extends DrushCommands {
    */
   public function drushDemo() {
     // It will load nodes of type basic page.
-    $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'page']);
+    $nodes = $this->entityManager->getStorage('node')->loadByProperties(['type' => 'page']);
     $rows = [];
     foreach ($nodes as $node) {
       $rows[] = [

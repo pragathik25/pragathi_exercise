@@ -5,4 +5,4 @@ Node permission:
   title : 'permission title'
   description: 'permission description'
 permission_callbacks:
-  - \Drupal\pragathi_exercise\NodePermissions::nodePermissions
+  - \Drupal\pragathi_exercise\NodePermissions::nodePermission

@@ -20,7 +20,7 @@ class NodePermissions {
    *
    * @see \Drupal\user\PermissionHandlerInterface::getPermissions()
    */
-  public function nodePermissions() {
+  public function nodePermission() {
     $perms = [];
     // Generate node permissions for all node types.
     foreach (NodeType::loadMultiple() as $type) {
@@ -28,7 +28,7 @@ class NodePermissions {
       $type_params = ['%type' => $type->label()];
       $perms += [
         "clone $type_id content" => [
-          'title' => $this->t('%type: clone content', $type_params),
+          'title' => $this->t('%type: node permission', $type_params),
         ],
       ];
     }
