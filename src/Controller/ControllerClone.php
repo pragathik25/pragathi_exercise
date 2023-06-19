@@ -40,8 +40,8 @@ class ControllerClone extends ControllerBase {
    */
   public function accessNode(AccountInterface $account, $node) {
     $node = Node::load($node);
-    $type = $node->getType();
-    if ($type == 'article' || $type === 'page') {
+    $type_id = $node->bundle();
+    if ($account->hasPermission("clone $type_id node")) {
       $result = AccessResult::allowed();
     }
     else {

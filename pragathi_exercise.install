@@ -5,8 +5,6 @@
  * Implement.
  */
 
-use Drupal\Core\Database\Database;
-
 /**
  * @file
  * Implement hook_schema().
@@ -78,8 +76,8 @@ function pragathi_exercise_update_100408() {
  * Create the tables for country, state, and district.
  */
 function pragathi_exercise_update_100413() {
-  $schema = Database::getConnection()->schema();
-  $connection = Database::getConnection();
+  $schema = \Drupal::database()->schema();
+  $connection = \Drupal::database();
 
   // Create country table.
   if (!$schema->tableExists('country')) {

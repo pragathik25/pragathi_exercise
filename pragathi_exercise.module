@@ -79,11 +79,12 @@ use Drupal\Core\Routing\RouteMatchInterface;
 function pragathi_exercise_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
     // Main module help for the custom_mail module.
-    case 'help.page.custom_mail':
+    case 'help.page.pragathi_exercise':
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('How to send an email programmatically') . '</p>';
+      $output .= '<p>' . t('custom module') . '</p>';
       return $output;
+
     default:
   }
 }

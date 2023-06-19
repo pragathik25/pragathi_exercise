@@ -41,7 +41,6 @@ pragathi_exercise.dynamicdemo:
     _title_callback: '\Drupal\pragathi_exercise\Controller\ControllerClone::nodeTitlePageTitle'
   requirements:
     _custom_access: '\Drupal\pragathi_exercise\Controller\ControllerClone::accessNode'
-    _permission: 'Node Permission'
   options:
     _admin_route: TRUE
     parameters:
