@@ -26,22 +26,20 @@ class AddressForm extends FormBase {
     $form['permanent_address'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Permanent Address'),
-      '#attributes' => ['id' => 'edit-permanent-address'],
+      '#attributes' => ['id' => 'permanent-address'],
     ];
 
     $form['same_as_permanent'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Same as Permanent'),
-      '#attributes' => ['id' => 'edit-same-as-permanent'],
+      '#attributes' => ['id' => 'same-as-permanent'],
     ];
 
     $form['temporary_address'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Temporary Address'),
-      '#attributes' => ['id' => 'edit-temporary-address'],
+      '#attributes' => ['id' => 'temporary-address'],
       '#states' => [
-          // Hide the temporary address field if the
-          // "same_as_permanent" checkbox is checked.
         'invisible' => [
           ':input[name="same_as_permanent"]' => ['checked' => TRUE],
         ],

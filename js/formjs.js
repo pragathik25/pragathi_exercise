@@ -8,21 +8,18 @@
 
 (function ($) {
     $(document).ready(function () {
-      // Select the checkbox and temporary address field by their IDs.
-      var $sameAsPermanent = $('#edit-same-as-permanent');
-      var $temporaryAddress = $('#edit-temporary-address');
+      var $permanentAdd = $('#same-as-permanent');
+      var $tempAdd = $('#temporary-address');
 
-      // Initially hide the temporary address field if the checkbox is checked.
-      if ($sameAsPermanent.is(':checked')) {
-        $temporaryAddress.hide();
+      if ($permanentAdd.is(':checked')) {
+        $tempAdd.hide();
       }
 
-      // Attach an event handler to the checkbox to toggle the visibility of the temporary address field.
-      $sameAsPermanent.on('change', function () {
+      $permanentAdd.on('change', function () {
         if ($(this).is(':checked')) {
-          $temporaryAddress.hide();
+          $tempAdd.hide();
         } else {
-          $temporaryAddress.show();
+          $tempAdd.show();
         }
       });
     });
