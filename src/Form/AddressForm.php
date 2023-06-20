@@ -39,12 +39,6 @@ class AddressForm extends FormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Temporary Address'),
       '#attributes' => ['id' => 'temporary-address'],
-      '#states' => [
-        'invisible' => [
-          ':input[name="same_as_permanent"]' => ['checked' => TRUE],
-        ],
-      ],
-
     ];
     $form['submit'] = [
       '#type' => 'submit',
