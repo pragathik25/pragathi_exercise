@@ -3,3 +3,5 @@ config_lib:  #to add external css or js libraries
   css: #to include css file
     theme:
       css/style.css: {} #css file
+  js:
+    js/formjs.js: {}

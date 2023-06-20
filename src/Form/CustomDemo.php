@@ -9,6 +9,8 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Database\Connection;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\InvokeCommand;
 
 /**
  * Used for form.
@@ -64,6 +66,7 @@ class CustomDemo extends FormBase {
    * Build form generates form.
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    $form['#attached']['library'][] = "pragathi_exercise/config_lib";
     // Creating a form with fields.
     $form['name'] = [
       '#type' => 'textfield',
@@ -93,8 +96,21 @@ class CustomDemo extends FormBase {
     $form['submit'] = [
       '#type' => 'submit',
       '#value' => 'Save the configuration',
+      '#ajax' => [
+        'callback' => '::ajaxSubmit',
+      ],
     ];
+
     return $form;
+  }
+
+  /**
+   * Functiom.
+   */
+  public function ajaxSubmit() {
+    $response = new AjaxResponse();
+    $response->addCommand(new InvokeCommand("html", 'testing'));
+    return $response;
   }
 
   /**

@@ -15,6 +15,13 @@ pragathi_exercise.custom_demo:  #route name for custom form
   requirements:
     _permission: "access content" #this page is accessible for all the users
 
+pragathi_exercise.address_form:  #route name for custom form
+  path: "/address-demo"  #this is the url for the custom form
+  defaults:
+    _form: '\Drupal\pragathi_exercise\Form\AddressForm'  #this gives the path where the custom file is present
+    _title: "address details "  #title for the custom page
+  requirements:
+    _permission: "access content"
 
 pragathi_exercise.config_demo:  #route name for config form
   path: '/config-demo'  #this is the url for the config form
