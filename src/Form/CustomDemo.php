@@ -114,6 +114,25 @@ class CustomDemo extends FormBase {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    if (strlen($form_state->getValue('usn')) < 10) {
+      $form_state->setErrorByName('usn', $this->t('The usn must be of 10 digit'));
+    }
+    $email = $form_state->getValue('email');
+    if (empty($email)) {
+      $form_state->setErrorByName('email', $this->t('The email field is required'));
+    }
+    else {
+      if (!preg_match('/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/', $email)) {
+        $form_state->setErrorByName('email', $this->t('Enter a valid email example : pkshetty4446@gmail.com'));
+      }
+    }
+
+  }
+
+  /**
    * Submit form.
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {

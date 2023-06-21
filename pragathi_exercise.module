@@ -8,6 +8,7 @@
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\pragathi_exercise\Event\UserLoginEvent;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 
 /**
  * Implements hook_form_alter().
@@ -49,6 +50,9 @@ function pragathi_exercise_user_login($account) {
  * Implements hook_page_attachments_alter().
  */
 function pragathi_exercise_page_attachments_alter(array &$attachments) {
+  $attachments['#attached']['library'][] = 'pragathi_exercise/config_lib';
+  $attachments['#attached']['drupalSettings']['pragathi_exercise']['testing'] = "testing variable";
+
   // Calling the service.
   $route_match = \Drupal::routeMatch();
   // Getting the route name of the particular page.
@@ -134,5 +138,43 @@ function pragathi_exercise_entity_insert(EntityInterface $entity) {
 
     \Drupal::messenger()->addMessage(t('Your message has been sent.'), 'status');
   }
+
+}
+
+/**
+ * Implements hook_entity_view_alter().
+ */
+function pragathi_exercise_entity_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
+  if ($entity->getEntityTypeId() == "node") {
+    $build['field_text']['#title'] = "text title changed";
+    unset($build['field_date']);
+    $build['markup'] = [
+      '#markup' => "<h3>Testing the hook</h3>",
+    ];
+  }
+
+}
+
+/**
+ * Implements hook_entity_view().
+ */
+function pragathi_exercise_entity_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  // Condition entity type = node.
+  $session = \Drupal::request()->getSession();
+  $counts = $session->get("pragathi_exercise.node_view_count", []);
+  if (!isset($counts[$entity->id()])) {
+    $counts[$entity->id()] = 1;
+  }
+  else {
+    $counts[$entity->id()]++;
+  }
+
+  $session->set("pragathi_exercise.node_view_count", $counts);
+  $build['count'] = [
+    '#markup' => "Viewed " . $counts[$entity->id()] . " times",
+    '#cache' => [
+      'max-age' => 0,
+    ],
+  ];
 
 }

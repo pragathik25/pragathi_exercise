@@ -24,3 +24,14 @@
         });
     });
 })(jQuery);
+
+(function ($, Drupal, drupalSettings) {
+    Drupal.behaviors.MyModuleBehavior = {
+        attach: function (context, settings) {
+        var testing = drupalSettings.pragathi_exercise.testing;
+        alert(testing)
+        $('body').css('background', testing);
+        }
+    };
+    // Drupal.behaviors.MyModuleBehavior.attach(document, Drupal.settings);
+})(jQuery, Drupal, drupalSettings);
