@@ -1,36 +1,36 @@
-(function ($, Drupal) {
-    $.fn.testing = function() {
-        alert("submitted");
-        $("#custom-demo-get-user-details").submit();
-    };
+// (function ($, Drupal) {
+//     $.fn.testing = function() {
+//         alert("submitted");
+//         $("#custom-demo-get-user-details").submit();
+//     };
 
-}(jQuery, Drupal));
+// }(jQuery, Drupal));
 
-(function ($) {
-    $(document).ready(function () {
-        var $permanentAdd = $('#same-as-permanent');
-        var $tempAdd = $('.form-item-temporary-address');
-//on load
-        if ($permanentAdd.is(':checked')) {
-            $tempAdd.hide();
-        }
+// (function ($) {
+//     $(document).ready(function () {
+//         var $permanentAdd = $('#same-as-permanent');
+//         var $tempAdd = $('.form-item-temporary-address');
+// //on load
+//         if ($permanentAdd.is(':checked')) {
+//             $tempAdd.hide();
+//         }
 
-        $permanentAdd.on('change', function () {
-        if ($(this).is(':checked')) {
-            $tempAdd.hide();
-        } else {
-            $tempAdd.show();
-        }
-        });
-    });
-})(jQuery);
+//         $permanentAdd.on('change', function () {
+//         if ($(this).is(':checked')) {
+//             $tempAdd.hide();
+//         } else {
+//             $tempAdd.show();
+//         }
+//         });
+//     });
+// })(jQuery);
 
-(function ($, Drupal, drupalSettings) {
-    Drupal.behaviors.MyModuleBehavior = {
-        attach: function (context, settings) {
-        var testing = drupalSettings.pragathi_exercise.testing;
-        alert(testing)
-        $('body').css('background', testing);
-        }
-    };
-})(jQuery, Drupal, drupalSettings);
+// (function ($, Drupal, drupalSettings) {
+//     Drupal.behaviors.MyModuleBehavior = {
+//         attach: function (context, settings) {
+//         var testing = drupalSettings.pragathi_exercise.testing;
+//         alert(testing)
+//         $('body').css('background', testing);
+//         }
+//     };
+// })(jQuery, Drupal, drupalSettings);

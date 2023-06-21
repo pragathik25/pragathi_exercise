@@ -14,12 +14,27 @@ pragathi_exercise.custom_demo:  #route name for custom form
     _title: "user details "  #title for the custom page
   requirements:
     _permission: "access content" #this page is accessible for all the users
+custom-modal-page:
+  path: '/modal-form-link'
+  defaults:
+    _controller: '\Drupal\pragathi_exercise\Controller\CustomController::modalLink'
+    _title: 'Open modal page'
+  requirements:
+    _permission: 'access content'
 
 pragathi_exercise.address_form:  #route name for custom form
   path: "/address-demo"  #this is the url for the custom form
   defaults:
     _form: '\Drupal\pragathi_exercise\Form\AddressForm'  #this gives the path where the custom file is present
     _title: "address details "  #title for the custom page
+  requirements:
+    _permission: "access content"
+
+pragathi_exercise.token_form:  #route name for custom form
+  path: "/token-demo"  #this is the url for the custom form
+  defaults:
+    _form: '\Drupal\pragathi_exercise\Form\TokenForm'  #this gives the path where the custom file is present
+    _title: "token demo "  #title for the custom page
   requirements:
     _permission: "access content"
 

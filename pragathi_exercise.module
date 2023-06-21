@@ -9,6 +9,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\pragathi_exercise\Event\UserLoginEvent;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
  * Implements hook_form_alter().
@@ -16,6 +17,15 @@ use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 function pragathi_exercise_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Calling theservice.
   $data = \Drupal::service('custom_service')->getName();
+
+  if ($form_id == "node_article_edit_form") {
+    $helptext = \Drupal::configFactory()->getEditable("pragathi_exercise.settings")->get("helptext");
+    // type: node object.
+    $node = \Drupal::routeMatch()->getParameter("node");
+    $token_service = \Drupal::token();
+    $hlptxt = $token_service->replace($helptext, ['node' => $node], ['clear' => TRUE]);
+    $form['#prefix'] = "<span>" . $hlptxt . "</span>";
+  }
 }
 
 /**
@@ -74,8 +84,6 @@ function pragathi_exercise_page_attachments_alter(array &$attachments) {
  * @file
  * Contains custom_mail.module..
  */
-
-use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
  * Implements hook_help().
