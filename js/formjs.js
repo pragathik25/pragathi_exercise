@@ -33,5 +33,4 @@
         $('body').css('background', testing);
         }
     };
-    // Drupal.behaviors.MyModuleBehavior.attach(document, Drupal.settings);
 })(jQuery, Drupal, drupalSettings);
