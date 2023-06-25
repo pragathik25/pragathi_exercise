@@ -186,3 +186,12 @@ function pragathi_exercise_entity_view(array &$build, EntityInterface $entity, E
   ];
 
 }
+
+/**
+ * Implements hook_entity_presave().
+ */
+function pragathi_exercise_entity_presave(EntityInterface $entity) {
+  if ($entity->getEntityTypeId() == "node") {
+    $entity->set("title", "entity presaving the values");
+  }
+}
