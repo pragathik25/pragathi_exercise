@@ -1,12 +1,19 @@
-(function ($, Drupal) {
+(function ($, Drupal, drupalSettings) {
+
+    Drupal.behaviors.MyModuleBehavior = {
+        attach: function (context, settings) {
+        var testing = drupalSettings.pragathi_exercise.testing;
+        console.log(testing)
+        $('body').css('background', testing);
+        }
+    };
+
     $.fn.testing = function() {
     console.log("submitted");
         $("#custom-demo-get-user-details").submit();
     };
 
-}(jQuery, Drupal));
 
-(function ($) {
     $(document).ready(function () {
         var $permanentAdd = $('#same-as-permanent');
         var $tempAdd = $('.form-item-temporary-address');
@@ -23,14 +30,13 @@
         }
         });
     });
-})(jQuery);
 
-(function ($, Drupal, drupalSettings) {
-    Drupal.behaviors.MyModuleBehavior = {
-        attach: function (context, settings) {
-        var testing = drupalSettings.pragathi_exercise.testing;
-        console.log(testing)
-        $('body').css('background', testing);
-        }
-    };
-})(jQuery, Drupal, drupalSettings);
+
+    $(document).ready(function () {
+        console.log("working");
+    });
+
+}(jQuery, Drupal, drupalSettings));
+
+
+

@@ -10,6 +10,8 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\pragathi_exercise\Event\UserLoginEvent;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\views\ViewExecutable;
+use Drupal\views\Plugin\views\cache\CachePluginBase;
 
 /**
  * Implements hook_form_alter().
@@ -191,7 +193,42 @@ function pragathi_exercise_entity_view(array &$build, EntityInterface $entity, E
  * Implements hook_entity_presave().
  */
 function pragathi_exercise_entity_presave(EntityInterface $entity) {
+  // print_r($entity->get("title")->getValue());
+  // exit;
   if ($entity->getEntityTypeId() == "node") {
     $entity->set("title", "entity presaving the values");
   }
+}
+
+/**
+ * Implements hook_views_pre_Render().
+ */
+function pragathi_exercise_views_pre_render(ViewExecutable $view) {
+  if ($view->id() == "content_view"  && $view->getDisplay()->display['id'] == "page_1") {
+    $view->element['#attached']['library'][] = "pragathi_exercise/config_lib";
+  }
+  $view->setTitle("title changed");
+}
+
+/**
+ * Implements hook_views_post_Render().
+ */
+function pragathi_exercise_views_post_render(ViewExecutable $view, array &$output, CachePluginBase $cache) {
+  if ($view->id() == "content_view"  && $view->getDisplay()->display['id'] == "page_1") {
+    // print_r(gettype($output));exit;
+    // print_r(array_keys($output));exit;
+    // print_r(array_keys($output['#rows'][0]['#rows']));exit;
+    unset($output['#rows'][0]['#rows'][0]);
+  }
+  $cache->options['result_lifespan'] = 0;
+  $cache->options['output_lifespan'] = 0;
+
+}
+
+/**
+ * Implements hook_node_presave().
+ */
+function pragathi_exercise_node_presave($node) {
+  // print_r($node->getCacheTags());
+  // print_r($node->getCacheContexts());exit;
 }
