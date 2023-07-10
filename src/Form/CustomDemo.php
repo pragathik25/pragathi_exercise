@@ -145,6 +145,7 @@ class CustomDemo extends FormBase {
       'email' => $form_state->getValue("email"),
       'place' => $form_state->getValue("place"),
     ])->execute();
+    $form_state->setRedirect('system.admin_content');
   }
 
 }
