@@ -42,7 +42,7 @@
 
 (function () {
     function MyModuleBehavior() {
-        var testing = drupalSettings.pragathi_exercise.testing;
+        const testing = drupalSettings.pragathi_exercise.testing;
         console.log(testing);
         document.body.style.background = testing;
     }
@@ -53,8 +53,8 @@
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        var permanentAdd = document.getElementById('same-as-permanent');
-        var tempAdd = document.querySelector('.form-item-temporary-address');
+        const permanentAdd = document.getElementById('same-as-permanent');
+        const tempAdd = document.querySelector('.form-item-temporary-address');
 
         // On load
         if (permanentAdd.checked) {
